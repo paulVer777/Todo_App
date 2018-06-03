@@ -7,10 +7,20 @@ const ToDo = (props) =>(
 
 
 
+</div>);
+
+
+const mapStateToProps = (state) = () =>({
 
 
 
-</div>)
+});
+
+const mapDispatchToProps = (Dispatch) = () =>({
 
 
 
+});
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(ToDo)
