@@ -1,12 +1,12 @@
 import {auth, googleProvider, database} from '../firebase'
 import {getTasksFromDb} from "./todo";
-
+import {getQuoteFromDb} from "./quote";
 
 const LOGGEDIN = 'auth/LOGGEDIN';
 const LOGGEDOUT = 'auth/LOGGEDOUT';
 
 const loggedIn = (user) => ({type: LOGGEDIN, user});
-const loggedOut = () => ({type: LOGGEDOUT});
+export const loggedOut = () => ({type: LOGGEDOUT});
 
 const initialState = {
 
@@ -21,6 +21,7 @@ export const initAuthUserSync = () => (dispatch, getState) => {
             if (user) {
                 dispatch(loggedIn(user))
                 dispatch(getTasksFromDb())
+                dispatch(getQuoteFromDb())
             }
             else
                 dispatch(loggedOut())
