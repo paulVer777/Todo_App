@@ -1,10 +1,16 @@
 import React from 'react'
+import Button from '@material-ui/core/Button';
 
 
+const LoginByGoogle = (props) => (
 
-const LoginByGoogle = () =>(
+    <div>
+        <Button color={"secondary"} variant={"contained"}
+                onClick={props.logIn}
 
-    <div></div>
+        >Login By Google</Button>
 
+    </div>
+);
 
-)
+export default LoginByGoogle

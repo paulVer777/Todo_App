@@ -1,16 +1,39 @@
+import {database} from "../firebase";
+import {mapObjectToArray} from "../functions";
+
 const ADDNEWTASK = 'todo/ADDNEWTASK';
-const ADDLETTER = 'todo/ADDLETTER';
+const ADDTXT = 'todo/ADDTXT';
 
 
-const addNewTask = (task) => ({type: ADDNEWTASK, task});
-const addLetter = (letter) => ({type: ADDLETTER, letter});
+export const addNewTask = (tasks) => ({type: ADDNEWTASK, tasks});
+export const addTxt = (txt) => ({type: ADDTXT, txt});
 
 
 const initialState = {
     tasks: [],
-    txt: ''
+    txt: ""
 };
 
+
+
+export const sendTaskToDb = () => (dispatch, getState) => {
+    const state = getState()
+    const userUid = state.auth.user.uid
+
+    database.ref('/Users/' + userUid + '/Tasks').push(
+        {description: state.todo.txt, completed: 'false'}
+    )
+};
+
+export const getTasksFromDb = () => (dispatch, getState) => {
+
+    const userUid = getState().auth.user.uid;
+    database.ref('/Users/' + userUid + '/Tasks').on(
+        'value',
+        (snapshot) => dispatch(addNewTask(mapObjectToArray(snapshot.val())))
+    )
+
+}
 
 export default (state = initialState, action) => {
 
@@ -18,12 +41,12 @@ export default (state = initialState, action) => {
         case ADDNEWTASK:
             return {
                 ...state,
-                tasks: action.task
+                tasks: action.tasks
             };
-        case ADDLETTER:
+        case ADDTXT:
             return {
                 ...state,
-                txt: action.letter
+                txt: action.txt
             };
         default:
             return state

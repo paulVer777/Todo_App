@@ -2,7 +2,7 @@ import {createStore,combineReducers,compose,applyMiddleware} from 'redux'
 import todo from './state/todo'
 import auth from './state/auth'
 import thunk from 'redux-thunk'
-
+import {initAuthUserSync} from "./state/auth";
 
 const reducer=combineReducers({
 
@@ -17,3 +17,6 @@ export const store = createStore(
     composeEnhancers(
         applyMiddleware(thunk))
 );
+
+
+store.dispatch(initAuthUserSync())
