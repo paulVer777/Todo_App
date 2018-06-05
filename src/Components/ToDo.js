@@ -15,7 +15,7 @@ const styles={
         marginBottom:'3em',
     },
     logOut:{
-       position:'fixed' ,
+       position:'absolute' ,
         right:'0px',
         top:'0px',
         backgroundColor:'#990c50'
@@ -24,6 +24,7 @@ const styles={
         marginTop:'3em',
           marginBottom:'3em',
         textAlign:'center',
+        padding:'30px'
     },
     span__h3:{
         color:'#3f51b5'
@@ -45,6 +46,7 @@ const ToDo = (props) => (
             fullWidth={true}
             placeholder={'Type task name here'}
             onChange={props.addTxt}
+            value={props.txt}
         />
         <Button variant={"contained"}
                 color={"primary"}
@@ -62,7 +64,8 @@ const ToDo = (props) => (
 const mapStateToProps = (state) => ({
 
     tasks:state.todo.tasks,
-    quote:state.quote.quote
+    quote:state.quote.quote,
+    txt:state.todo.txt
 
 });
 const mapDispatchToProps = (dispatch) => ({

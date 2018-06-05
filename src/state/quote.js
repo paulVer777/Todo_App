@@ -17,7 +17,7 @@ export const fetchQuote = () => (dispatch, getState) => (
         .then(data => database.ref('/Quote').set(
             {quote: data.contents.quotes[0].quote}
             )
-        ).catch(() => alert("nie udalo sie")));
+        ).catch(() => alert("Failed to get quote")));
 
 export const getQuoteFromDb = () => (dispatch, getState) => {
     database.ref('/Quote').on(
